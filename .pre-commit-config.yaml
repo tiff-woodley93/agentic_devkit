@@ -1,0 +1,7 @@
+# .pre-commit-config.yaml
+repos:
+  - repo: git@github.com:Explore-AI/FloPlatform.FloTools.Comfit.git
+    rev: v0.4.0  # Use the latest tag on the GitHub repo's releases page
+    hooks:
+    - id: comfit
+    - id: comfit-init

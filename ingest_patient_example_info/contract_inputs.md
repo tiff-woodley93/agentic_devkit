@@ -1,0 +1,46 @@
+
+The following csvs are provided in agentic_devkit/data:
+
+allergies:
+    START
+    STOP
+    PATIENT
+    ENCOUNTER
+    CODE
+    DESCRIPTION
+careplans:
+    Id
+    START
+    STOP
+    PATIENT
+    ENCOUNTER
+    CODE
+    DESCRIPTION
+    REASONCODE
+    REASONDESCRIPTION
+patients:
+    Id
+    BIRTHDATE
+    DEATHDATE
+    SSN
+    DRIVERS
+    PASSPORT
+    PREFIX
+    FIRST
+    LAST
+    SUFFIX
+    MAIDEN
+    MARITAL
+    RACE
+    ETHNICITY
+    GENDER 
+    BIRTHPLACE 
+    ADDRESS 
+    CITY 
+    STATE 
+    COUNTY 
+    ZIP 
+    LAT 
+    LON
+    HEALTHCARE_EXPENSES
+    HEALTHCARE_COVERAGE

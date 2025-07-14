@@ -1,0 +1,57 @@
+# Comfit Configuration File
+# This is a template to get you started. Uncomment and customize the rules as needed.
+
+structural_rules:
+  # 'must_exist' checks that these files or directories are present.
+  must_exist:
+    - src/
+    - tests/
+    - pyproject.toml
+    - README.md
+
+  # 'must_not_exist' checks that these files or directories are NOT present.
+  # Useful for catching temporary files or secrets.
+  # must_not_exist:
+  #   - .env
+
+file_content_rules:
+  # Rules for files matching the 'README.md' name.
+  "README.md":
+    # 'must_contain' checks for the presence of specific regex patterns.
+    must_contain:
+      - pattern: "# Project Title"
+        fail_message: "README.md must contain a level 1 heading for the project title."
+
+    # 'llm_checks' use a configured Large Language Model for advanced checks.
+    # This requires setting up API keys via 'comfit init' and installing LLM provider packages.
+    agent_criteria:
+      - criterion: "The README should explain the purpose of the project."
+        fail_message: "Missing project purpose."
+
+  # Rules for all Python files in the 'src' directory.
+  "*.py":
+    # 'must_not_contain' checks for the absence of specific regex patterns.
+    agent_criteria:
+      - criterion: "There should be no hardcoded values in the code."
+        fail_message: "Hardcoded values found."
+
+linter_checks:
+  # This check runs the 'ruff' linter on your source and test files.
+  - name: "Ruff Lint"
+    tool: ruff
+    # 'linter_args' are passed directly to the tool's command line.
+    linter_args:
+      - "check"
+      - "src/"
+      - "tests/"
+    # 'config_file' specifies the linter's own configuration file.
+    # comfit will mount this into the Docker container.
+    config_file: "ruff.toml" # or .ruff.toml, pyproject.toml
+
+  # This check runs the 'gitleaks' scanner to find hard-coded secrets.
+  - name: "Gitleaks Secret Scan"
+    tool: gitleaks
+    linter_args:
+      - "detect"
+      - "--source=." # Scan the entire repository
+      - "-v"
